@@ -1,0 +1,35 @@
+<div>
+    {% if path(app.request.get('_route')) != '/' %}
+        <a href="{{ path('homepage') }}">
+            {{ 'Mecánica'|trans({}, 'FOSUserBundle') }}
+        </a>
+        <br>
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <p>¡Hola {{ app.user.name|title }}!</p>
+        <a href="{{ path('fos_user_security_logout') }}">
+            Cerrar Sesión
+        </a>
+    {% else %}
+        {% if path(app.request.get('_route')) == '/login' %}
+            <a href="{{ path('fos_user_registration_register') }}">
+                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% elseif path(app.request.get('_route')) == '/register/' %}
+            <a href="{{ path('fos_user_security_login') }}">
+                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            <a href="{{ path('fos_user_registration_register') }}">
+                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
+            </a>
+            <br>
+            <a href="{{ path('fos_user_security_login') }}">
+                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% endif %}
+    {% endif %}
+
+    <hr>
+</div>
