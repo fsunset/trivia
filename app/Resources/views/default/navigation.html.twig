@@ -9,6 +9,8 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <p>¡Hola {{ app.user.name|title }}!</p>
 
+        Balones: {{ app.user.score }}
+        <br>
         {% if path(app.request.get('_route'), app.request.get('_route_params')) != '/profile/' %}
             <a href="{{ path('fos_user_profile_show') }}">
                 Mis Datos

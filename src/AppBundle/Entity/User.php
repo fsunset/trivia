@@ -36,7 +36,7 @@ class User extends BaseUser {
     protected $lastName;
 
     /**
-     * @var integer
+     * @var string
      *
      * @ORM\Column(name="mobile", type="string", length=15)
      * @Assert\NotBlank(message="Por favor, indícanos tu teléfono.", groups={"Registration", "Profile"})
@@ -44,7 +44,7 @@ class User extends BaseUser {
     protected $mobile;
 
     /**
-     * @var integer
+     * @var string
      *
      * @ORM\Column(name="bill", type="string", length=15)
      * @Assert\NotBlank(message="Por favor, indícanos tu número de factura.", groups={"Registration"})
@@ -52,18 +52,25 @@ class User extends BaseUser {
     protected $bill;
 
     /**
-     * @var integer
+     * @var bool
      *
      * @ORM\Column(name="isAssociated", type="boolean", options={"default":"0"})
      */
     protected $isAssociated;
 
     /**
-     * @var integer
+     * @var bool
      *
      * @ORM\Column(name="acceptedTerms", type="boolean", options={"default":"0"})
      */
     protected $acceptedTerms;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="score", type="integer")
+     */
+    protected $score = 5;
 
 
     public function __construct() {
@@ -207,5 +214,28 @@ class User extends BaseUser {
     public function getAcceptedTerms()
     {
         return $this->acceptedTerms;
+    }
+
+    /**
+     * Set the value of score.
+     *
+     * @param string $score
+     * @return \AppBundle\Entity\User
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of score.
+     *
+     * @return string
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 }
