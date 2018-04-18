@@ -14,7 +14,10 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% include 'default/navigation.html.twig' %}
+
         {% block body %}{% endblock %}
+
         <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>

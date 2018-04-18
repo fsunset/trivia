@@ -11,6 +11,10 @@
 
         Balones: {{ app.user.score }}
         <br>
+        <a id="rankingModalBtn" href="#" data-url="{{path('ranking')}}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#rankingModal">
+          Ranking
+        </a>
+        <br>
         {% if path(app.request.get('_route'), app.request.get('_route_params')) != '/profile/' %}
             <a href="{{ path('fos_user_profile_show') }}">
                 Mis Datos
@@ -42,3 +46,6 @@
 
     <hr>
 </div>
+
+<!-- Ranking Modal -->
+{% include 'Partials/rankingModal.html.twig' %}
