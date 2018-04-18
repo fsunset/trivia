@@ -1,3 +1,4 @@
+node_modules/
 /.web-server-pid
 /app/config/parameters.yml
 /build/
