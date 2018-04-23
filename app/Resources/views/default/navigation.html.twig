@@ -1,51 +1,75 @@
-<div>
-    {% if path(app.request.get('_route'), app.request.get('_route_params')) != '/' %}
-        <a href="{{ path('homepage') }}">
-            {{ 'Mecánica'|trans({}, 'FOSUserBundle') }}
-        </a>
-        <br>
-    {% endif %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <img src="{{ asset('img/logo-colsubsidio.png') }}" class="logo-centered hidden-xs hidden-sm" alt="Colsubsidio">
 
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <p>¡Hola {{ app.user.name|title }}!</p>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-        Balones: {{ app.user.score }}
-        <br>
-        <a id="rankingModalBtn" href="#" data-url="{{path('ranking')}}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#rankingModal">
-          Ranking
-        </a>
-        <br>
-        {% if path(app.request.get('_route'), app.request.get('_route_params')) != '/profile/' %}
-            <a href="{{ path('fos_user_profile_show') }}">
-                Mis Datos
-            </a>
-            <br>
-        {% endif %}
-        <a href="{{ path('fos_user_security_logout') }}">
-            Cerrar Sesión
-        </a>
-    {% else %}
-        {% if path(app.request.get('_route'), app.request.get('_route_params')) == '/login' %}
-            <a href="{{ path('fos_user_registration_register') }}">
-                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
-            </a>
-        {% elseif path(app.request.get('_route'), app.request.get('_route_params')) == '/register/' %}
-            <a href="{{ path('fos_user_security_login') }}">
-                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
-            </a>
-        {% else %}
-            <a href="{{ path('fos_user_registration_register') }}">
-                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
-            </a>
-            <br>
-            <a href="{{ path('fos_user_security_login') }}">
-                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
-            </a>
-        {% endif %}
-    {% endif %}
+            <img src="{{ asset('img/logo-game.png') }}" class="navbar-brand" alt="Trivia Mundialista">
+        </div>
 
-    <hr>
-</div>
+        <div id="navbar" class="collapse navbar-collapse clearfix">
+            <ul class="nav navbar-nav text-center">
+                {% if path(app.request.get('_route'), app.request.get('_route_params')) != '/' %}
+                    <li>
+                            <a href="{{ path('homepage') }}">
+                                {{ 'Mecánica'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                            <br>
+                    </li>
+                {% endif %}
+
+
+                {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {% if path(app.request.get('_route'), app.request.get('_route_params')) == '/login' %}
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                    {% elseif path(app.request.get('_route'), app.request.get('_route_params')) == '/register/' %}
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Cuenta <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {% if path(app.request.get('_route'), app.request.get('_route_params')) != '/profile/' %}
+                                <li>
+                                    <a href="{{ path('fos_user_profile_show') }}">Mis Datos</a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">Cerrar Sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
 
 <!-- Ranking Modal -->
 {% include 'Partials/rankingModal.html.twig' %}

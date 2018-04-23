@@ -1,1 +1,152 @@
+/*
+* Bootstrap
+ */
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+/*
+* Path Vars
+ */
+$bgImage: '../../../../web/img/bg.jpg';
+
+/*
+* Colour Vars
+ */
+$blueDark: #041625;
+$yellowDark: #f8bb43;
+$white: white;
+$greySoft: #f5f5f5;
+
+/*
+* Globals
+ */
+html {
+    position: relative;
+    min-height: 100%;
+
+    body {
+        background-color: $blueDark;
+        color: $white;
+
+        margin-bottom: 60px;
+
+        a {
+            color: $yellowDark !important;
+
+            &:hover {
+                color: $white !important;
+                text-decoration: none !important;
+            }
+        }
+
+        .navbar-default {
+            background-color: $blueDark;
+            border: none;
+
+            .navbar-brand {
+                width: 200px;
+                height: auto;
+            }
+
+            .navbar-toggle {
+                border: none;
+
+                &:hover,
+                &:focus {
+                    background: none;
+                    border: none;
+                }
+
+                .icon-bar {
+                    background-color: white;
+                }
+            }
+
+            .logo-centered {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 190px;
+                margin-bottom: -72px;
+                margin-top: 26px;
+            }
+
+            .navbar-nav {
+                .dropdown-menu {
+                    background-color: $blueDark !important;
+
+                    li > a:focus,
+                    li > a:hover {
+                        background-color: transparent !important;
+                    }
+                }
+
+                & > .open > a {
+                    background-color: transparent !important;
+                }
+            }
+        }
+
+        > .container-fluid {
+            padding-top: 160px;
+            background-image: url("#{$bgImage}");
+            min-height: 880px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: $white;
+            padding-top: 10px;
+
+            img {
+                width: 200px;
+                margin-bottom: 10px;
+            }
+
+            .container {
+                padding-right: 0;
+                margin-right: 15px;
+
+                .text-muted {
+                    margin: 0;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    color: $blueDark;
+                    line-height: 1;
+
+                    a:hover {
+                        color: $yellowDark !important;
+                    }
+                }
+            }
+
+            .text-right {
+                padding-right: 0;
+
+                img {
+                    width: 400px;
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+        }
+
+        form input {
+            color: $blueDark !important;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .navbar.navbar-default.navbar-fixed-top {
+                height: 80px;
+
+                .nav.navbar-nav {
+                    float: right;
+                    margin-top: 35px;
+                }
+            }
+        }
+    }
+}
