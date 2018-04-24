@@ -16,14 +16,12 @@
     <body>
         {% include 'default/navigation.html.twig' %}
 
-        <div class="container-fluid">
-            <div class="container">
-                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                    {% include 'Partials/playerInfo.html.twig' %}
-                {% endif %}
+        <div class="container main-container">
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                {% include 'Partials/playerInfo.html.twig' %}
+            {% endif %}
 
-                {% block body %}{% endblock %}
-            </div>
+            {% block body %}{% endblock %}
         </div>
 
         <footer class="footer">

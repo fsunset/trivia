@@ -3,15 +3,19 @@
 {% block body %}
     <div class="col-xs-12  col-sm-4 text-center">
         <div class="row">
-            <img src="{{ asset('img/roulette.png') }}" class="roulette" alt="Ruleta">
+            <img id="roulette" src="{{ asset('img/roulette.png') }}" data-src="{{ asset('img/gif/roulette.gif') }}" class="roulette" alt="Ruleta">
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                Jugar
+            <div class="col-xs-6 text-right">
+                <span id="startRoulette" class="btn-roulette btn-roulette-yellow">
+                    Jugar
+                </span>
             </div>
-            <div class="col-xs-12 col-sm-6">
-                Detener
+            <div class="col-xs-6 text-left">
+                <span id="stopRoulette" class="btn-roulette">
+                    Detener
+                </span>
             </div>
             <div class="col-xs-12 time-left">
                 <p>

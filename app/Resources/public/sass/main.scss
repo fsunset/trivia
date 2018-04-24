@@ -16,6 +16,7 @@ $yellowDark: #f8bb43;
 $white: white;
 $black: black;
 $blackTransparent: rgba($black, 0);
+$blackTransparentLight: rgba($black, .2);
 $blackTransparentMedium: rgba($black, .5);
 $greySoft: #f5f5f5;
 
@@ -45,8 +46,10 @@ html {
     body {
         background-color: $blueDark;
         color: $white;
-
         margin-bottom: 60px;
+        background-image: url("#{$bgImage}");
+        background-size: cover;
+        background-repeat: no-repeat;
 
         a {
             color: $yellowDark !important;
@@ -68,6 +71,11 @@ html {
 
         * {
             font-weight: $fontWeight;
+        }
+
+        .main-container {
+            padding: 140px 0 70px;
+            // height: 760px;
         }
 
         .container {
@@ -147,6 +155,28 @@ html {
 
             .time-left {
                 margin-top: 20px;
+                font-size: 1.12em;
+
+                span {
+                    color: $yellowDark;
+                }
+            }
+
+            .btn-roulette {
+                color: $white;
+                border-radius: 50px;
+                padding: 7px 20px;
+                border: 2px solid;
+                border-color: $white;
+                cursor: pointer;
+                font-size: 1.4em;
+                background-color: $blackTransparentLight;
+            }
+
+            .btn-roulette-yellow {
+                color: $yellowDark;
+                padding: 7px 26px;
+                border-color: $yellowDark;
             }
         }
 
@@ -198,19 +228,12 @@ html {
             }
         }
 
-        > .container-fluid {
-            background-image: url("#{$bgImage}");
-            padding-top: 140px;
-            height: 760px;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
         .footer {
             position: absolute;
             width: 100%;
             background-color: $white;
             padding-top: 10px;
+            bottom: 0;
 
             img {
                 width: 200px;

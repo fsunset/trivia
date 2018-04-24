@@ -7,11 +7,21 @@ require("bootstrap-sass");
 
 
 $(document).ready(function() {
-	let $rankingModalBtn = $("#rankingModalBtn"),
+	let
+		// Globals
+		$rankingModalBtn = $("#rankingModalBtn"),
 		$rankingModal = $("#rankingModal"),
-		$rankingList = $("#rankingList");
+		$rankingList = $("#rankingList"),
 
-	$rankingModalBtn.on("click", function(e){
+		// Player Dashboard
+		$roulette = $("#roulette"),
+		$roulettePNGPath = $roulette.attr("src"),
+		$rouletteGIFPath = $roulette.attr("data-src"),
+		$startRouletteBtn = $("#startRoulette"),
+		$stopRouletteBtn = $("#stopRoulette")
+		;
+
+	$rankingModalBtn.on("click", function(e) {
 		e.preventDefault();
 
 		let $this = $(this),
@@ -40,5 +50,13 @@ $(document).ready(function() {
 				console.error("An unhandled error occurred in ajax success callback: " + error);
 			}
 		});
+	});
+
+	$startRouletteBtn.on("click", function() {
+		$roulette.attr("src", $rouletteGIFPath);
+	});
+
+	$stopRouletteBtn.on("click", function() {
+		$roulette.attr("src", $roulettePNGPath);
 	});
 });
