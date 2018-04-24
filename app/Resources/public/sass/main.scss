@@ -199,27 +199,31 @@ html {
             /*
             * PLayer Dashboard Styles
              */
-            .player-info > div {
-                background: $blackTransparentMedium;
-                height: 56px;
-                margin: 15px 3px 0 0;
+            .player-info {
+                margin-left: 10px;
 
-                &:last-child {
-                    background: $blackTransparentMedium; /* For browsers that do not support gradients */
-                    background: -webkit-linear-gradient(right, $blackTransparent, $blackTransparentMedium);
-                    background: -o-linear-gradient(right, $blackTransparent, $blackTransparentMedium);
-                    background: linear-gradient(to left, $blackTransparent, $blackTransparentMedium);
-                }
+                > div {
+                    background: $blackTransparentMedium;
+                    height: 56px;
+                    margin: 15px 3px 0 0;
 
-                p {
-                    color: $yellowDark;
-                    font-size: 1.1em;
-                }
+                    &:last-child {
+                        background: $blackTransparentMedium; /* For browsers that do not support gradients */
+                        background: -webkit-linear-gradient(right, $blackTransparent, $blackTransparentMedium);
+                        background: -o-linear-gradient(right, $blackTransparent, $blackTransparentMedium);
+                        background: linear-gradient(to left, $blackTransparent, $blackTransparentMedium);
+                    }
 
-                p.greetings {
-                    color: $white;
-                    margin: 7px 0 -1px;
-                    font-size: 1.2em;
+                    p {
+                        color: $yellowDark;
+                        font-size: 1.1em;
+                    }
+
+                    p.greetings {
+                        color: $white;
+                        margin: 7px 0 -1px;
+                        font-size: 1.2em;
+                    }
                 }
             }
 
