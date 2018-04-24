@@ -12,6 +12,7 @@ $(document).ready(function() {
 		$rankingModalBtn = $("#rankingModalBtn"),
 		$rankingModal = $("#rankingModal"),
 		$rankingList = $("#rankingList"),
+		thisUserId = $rankingList.attr("data-this-user"),
 		$totalUsers = $("#totalUsers"),
 
 		// Player Dashboard
@@ -30,7 +31,8 @@ $(document).ready(function() {
 			$htmlcontent = "",
 			loaderPath = $this.attr("data-loader"),
 			htmlLoader = "<li class='text-center loader-container'><img src=" + loaderPath + " alt='Cargando...'></li>",
-			totalUsers = 0;
+			totalUsers = 0,
+			userClassHeader = "";
 
 		$.ajax({
 			url: $url,
@@ -42,7 +44,9 @@ $(document).ready(function() {
 			},
 			success: function(users) {
 				$.each(JSON.parse(users), (index, user) => {
-					$htmlcontent += "<div class='col-xs-2 text-center player-row'>" + parseInt(index+1) + "</div><div class='col-xs-8 player-name player-row'>" + user.name + "</div><div class='col-xs-2 text-center player-row'>" + user.score + "</div>";
+					thisUserId == user.id ? userClassHeader = " header" : userClassHeader = "";
+
+					$htmlcontent += "<div class='col-xs-2 text-center player-row" + userClassHeader + "'>" + parseInt(index+1) + "</div><div class='col-xs-8 player-name player-row" + userClassHeader + "'>" + user.name + "</div><div class='col-xs-2 text-center player-row" + userClassHeader + "'>" + user.score + "</div>";
 
 					totalUsers = user.totalUsers;
 				});
