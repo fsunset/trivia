@@ -29,14 +29,16 @@ class DefaultController extends Controller
     public function rankingAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $users = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC', 'id' => 'ASC'));
+            $totalUsers = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+            $users = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC', 'id' => 'ASC'), 10);
             $usersArray = [];
 
             foreach ($users as $user) {
                 array_push($usersArray, array(
                     'name' => $user->getName() . ' ' . $user->getLastName(),
                     'score' => $user->getScore(),
-                    'id' => $user->getId()
+                    'id' => $user->getId(),
+                    'totalUsers' => count($totalUsers)
                 ));
             }
 

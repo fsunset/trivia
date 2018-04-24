@@ -12,6 +12,7 @@ $(document).ready(function() {
 		$rankingModalBtn = $("#rankingModalBtn"),
 		$rankingModal = $("#rankingModal"),
 		$rankingList = $("#rankingList"),
+		$totalUsers = $("#totalUsers"),
 
 		// Player Dashboard
 		$roulette = $("#roulette"),
@@ -28,7 +29,8 @@ $(document).ready(function() {
 			$url = $this.attr("data-url"),
 			$htmlcontent = "",
 			loaderPath = $this.attr("data-loader"),
-			htmlLoader = "<li class='text-center loader-container'><img src=" + loaderPath + " alt='Cargando...'></li>";
+			htmlLoader = "<li class='text-center loader-container'><img src=" + loaderPath + " alt='Cargando...'></li>",
+			totalUsers = 0;
 
 		$.ajax({
 			url: $url,
@@ -40,10 +42,13 @@ $(document).ready(function() {
 			},
 			success: function(users) {
 				$.each(JSON.parse(users), (index, user) => {
-					$htmlcontent += "<li>" + user.name + " - <span>" + user.score + "</span></li>";
+					$htmlcontent += "<div class='col-xs-2 text-center player-row'>" + parseInt(index+1) + "</div><div class='col-xs-8 player-name player-row'>" + user.name + "</div><div class='col-xs-2 text-center player-row'>" + user.score + "</div>";
+
+					totalUsers = user.totalUsers;
 				});
 
 				$rankingList.html($htmlcontent);
+				$totalUsers.html(totalUsers);
 				$rankingModal.modal("show");
 			},
 			error: function(error) {

@@ -32,17 +32,87 @@ html {
     position: relative;
     min-height: 100%;
 
-    .ranking-modal {
-        .modal-title,
-        li, span {
-            color: $blueDark !important;
+    /*
+    * Modals
+     */
+    .modal {
+        .modal-header {
+            border: none;
+            background: $blueDark;
+
+            .modal-title {
+                font-size: 2em;
+                color: $white;
+
+                small {
+                    display: block;
+                }
+            }
+
+            .modal-brand {
+                width: 180px;
+                height: auto;
+                position: absolute;
+                left: 20px;
+                top: -3px;
+                z-index: 99;
+            }
         }
 
-        .loader-container img {
-            width: 60px;
+        .modal-body {
+            background-image: url("#{$bgImage}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding-top: 60px;
+
+            li, span {
+                color: $white !important;
+            }
+
+            .loader-container img {
+                width: 60px;
+            }
+
+            .alert-custom {
+                background: $blackTransparentMedium;
+                font-size: 1.1em;
+                border-radius: 0;
+            }
+
+            .player-name {
+                text-transform: capitalize;
+            }
+
+            > .row {
+                border-bottom: 1px solid white;
+                margin: 0 15px 20px 15px;
+                padding-bottom: 3px;
+
+                .header {
+                    color: $yellowDark !important;
+                }
+
+                &:last-child {
+                    border: none;
+                }
+
+                .player-row {
+                    border-bottom: 1px solid;
+                    padding-bottom: 2px;
+                    margin-bottom: 5px;
+                }
+            }
         }
     }
 
+    .modal-backdrop.in {
+        opacity: .7 !important;
+    }
+
+
+    /*
+    * Body
+     */
     body {
         background-color: $blueDark;
         color: $white;
