@@ -2,6 +2,36 @@
 
 {% block body %}
     <div class="container-fluid">
-        <h1>Ruleta Mundialista Colsubsidio</h1>
+        <div class="container">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                <img src="{{ asset('img/logo-game.png') }}" class="main-logo-game" alt="Trivia Mundialista">
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-xs-12  col-sm-4 text-center">
+                <div class="info">
+                    <span>
+                        Por cada <span class="yellow">$80.000 pesos en compras</span> de productos de Recreación y Turismo Colsubsidio podrás registrarte.
+                    </span>
+
+                    <span class="middle">¡Sumar balones es muy fácil!</span>
+
+                    <ul>
+                        <li>1. Gira la ruleta</li>
+                        <li>2. Responde tres preguntas diarias</li>
+                        <li>3. Suma todos los balones que puedas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12  col-sm-4 text-center">
+                <img src="{{ asset('img/roulette.png') }}" class="roulette" alt="Ruleta">
+            </div>
+
+            <div class="col-xs-12  col-sm-4 play">
+                <img src="{{ asset('img/btn-play.png') }}" class="btn-play" alt="Jugar">
+            </div>
+        </div>
     </div>
 {% endblock %}

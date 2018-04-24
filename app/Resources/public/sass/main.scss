@@ -14,6 +14,7 @@ $bgImage: '../../../../web/img/bg.jpg';
 $blueDark: #041625;
 $yellowDark: #f8bb43;
 $white: white;
+$black: black;
 $greySoft: #f5f5f5;
 
 /*
@@ -35,6 +36,53 @@ html {
             &:hover {
                 color: $white !important;
                 text-decoration: none !important;
+            }
+        }
+
+        ol,
+        ul {
+            padding: 0;
+
+            > li {
+                list-style: none;
+            }
+        }
+
+        .container {
+            position: relative;
+
+            .info {
+                background: rgba($black, .4);
+                border-radius: 9%;
+                padding: 22px;
+                margin-top: 35px;
+
+                .middle {
+                    margin: 20px 0;
+                    display: block;
+                }
+
+                .yellow {
+                    color: $yellowDark;
+                }
+            }
+
+            .main-logo-game {
+                width: 300px;
+                max-width: 100%;
+            }
+
+            .roulette {
+                width: 100%;
+            }
+
+            .play {
+                text-align: center;
+                margin-bottom: 15%;
+
+                .btn-play {
+                    width: 50%;
+                }
             }
         }
 
@@ -87,16 +135,15 @@ html {
         }
 
         > .container-fluid {
-            padding-top: 160px;
             background-image: url("#{$bgImage}");
-            min-height: 880px;
+            padding-top: 140px;
+            height: 760px;
             background-size: cover;
             background-repeat: no-repeat;
         }
 
         .footer {
             position: absolute;
-            bottom: 0;
             width: 100%;
             background-color: $white;
             padding-top: 10px;
@@ -121,6 +168,10 @@ html {
                         color: $yellowDark !important;
                     }
                 }
+
+                .row {
+                    overflow: hidden;
+                }
             }
 
             .text-right {
@@ -138,6 +189,12 @@ html {
             color: $blueDark !important;
         }
 
+        @media only screen and (max-width: 767px) {
+            .footer .text-right {
+                padding-top: 8%;
+            }
+        }
+
         @media only screen and (min-width: 768px) {
             .navbar.navbar-default.navbar-fixed-top {
                 height: 80px;
@@ -145,6 +202,17 @@ html {
                 .nav.navbar-nav {
                     float: right;
                     margin-top: 35px;
+                }
+            }
+
+            .container {
+                .info {
+                    margin-top: 100px;
+                }
+
+                .play {
+                    margin-top: 160px;
+                    text-align: left;
                 }
             }
         }
