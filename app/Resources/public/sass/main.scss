@@ -20,6 +20,11 @@ $blackTransparentMedium: rgba($black, .5);
 $greySoft: #f5f5f5;
 
 /*
+* Other Vars
+ */
+$fontWeight: 300 !important;
+
+/*
 * Globals
  */
 html {
@@ -59,6 +64,10 @@ html {
             > li {
                 list-style: none;
             }
+        }
+
+        * {
+            font-weight: $fontWeight;
         }
 
         .container {
@@ -109,6 +118,9 @@ html {
                 width: 40px;
             }
 
+            /*
+            * PLayer Dashboard Styles
+             */
             .player-info > div {
                 background: $blackTransparentMedium;
                 height: 56px;
@@ -124,15 +136,17 @@ html {
                 p {
                     color: $yellowDark;
                     font-size: 1.1em;
-                    font-weight: 300;
                 }
 
                 p.greetings {
                     color: $white;
                     margin: 7px 0 -1px;
                     font-size: 1.2em;
-                    font-weight: 300;
                 }
+            }
+
+            .time-left {
+                margin-top: 20px;
             }
         }
 
