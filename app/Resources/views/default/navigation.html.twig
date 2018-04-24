@@ -24,8 +24,7 @@
                     </li>
                 {% endif %}
 
-
-                {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
                     {% if path(app.request.get('_route'), app.request.get('_route_params')) == '/login' %}
                         <li>
                             <a href="{{ path('fos_user_registration_register') }}">
@@ -69,7 +68,3 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-
-<!-- Ranking Modal -->
-{% include 'Partials/rankingModal.html.twig' %}

@@ -14,9 +14,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $user = $this->getUser();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
 
-        return $this->render('default/index.html.twig');
+        $user = $this->getUser();
+        return $this->render('default/dashboard.html.twig');
+
     }
 
     /**
@@ -25,13 +29,14 @@ class DefaultController extends Controller
     public function rankingAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $users = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC', 'id' => 'DESC'));
+            $users = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC', 'id' => 'ASC'));
             $usersArray = [];
 
             foreach ($users as $user) {
                 array_push($usersArray, array(
                     'name' => $user->getName() . ' ' . $user->getLastName(),
-                    'score' => $user->getScore()
+                    'score' => $user->getScore(),
+                    'id' => $user->getId()
                 ));
             }
 

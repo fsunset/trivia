@@ -8,6 +8,7 @@ require("bootstrap-sass");
 
 $(document).ready(function() {
 	let $rankingModalBtn = $("#rankingModalBtn"),
+		$rankingModal = $("#rankingModal"),
 		$rankingList = $("#rankingList");
 
 	$rankingModalBtn.on("click", function(e){
@@ -15,7 +16,9 @@ $(document).ready(function() {
 
 		let $this = $(this),
 			$url = $this.attr("data-url"),
-			$htmlcontent = '';
+			$htmlcontent = "",
+			loaderPath = $this.attr("data-loader"),
+			htmlLoader = "<li class='text-center loader-container'><img src=" + loaderPath + " alt='Cargando...'></li>";
 
 		$.ajax({
 			url: $url,
@@ -23,14 +26,15 @@ $(document).ready(function() {
 			data: {},
 			type: "json",
 			beforeSend: () => {
-				$rankingList.html('Cargando...');
+				$rankingList.html(htmlLoader);
 			},
 			success: function(users) {
 				$.each(JSON.parse(users), (index, user) => {
-					$htmlcontent += '<li>' + user.name + ' - <span>' + user.score + '</span></li>';
+					$htmlcontent += "<li>" + user.name + " - <span>" + user.score + "</span></li>";
 				});
 
 				$rankingList.html($htmlcontent);
+				$rankingModal.modal("show");
 			},
 			error: function(error) {
 				console.error("An unhandled error occurred in ajax success callback: " + error);

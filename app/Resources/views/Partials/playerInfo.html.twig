@@ -1,0 +1,19 @@
+<div class="row player-info">
+    <div class="col-xs-3 col-sm-1 text-center">
+        {# Timer #}
+    </div>
+
+    <div class="col-xs-3 col-sm-1 text-center">
+        <img src="{{ asset('img/trophy.png') }}" alt="Balon" id="rankingModalBtn" data-loader="{{ asset('img/gif/loader.gif') }}" data-url="{{path('ranking')}}" class="icon-trophy">
+    </div>
+
+    <div class="col-xs-3 col-sm-1 text-center">
+        <p>{{ app.user.score }}</p>
+        <img src="{{ asset('img/ball.png') }}" alt="Balon" class="icon-ball">
+    </div>
+
+    <div class="col-xs-9 col-sm-2">
+        <p class="greetings">¡Hola!</p>
+        <p>{{ app.user.name|title }}</p>
+    </div>
+</div>
