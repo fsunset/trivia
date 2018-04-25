@@ -197,7 +197,7 @@ html {
             }
 
             /*
-            * PLayer Dashboard Styles
+            * Player Dashboard Styles
              */
             .player-info {
                 margin-left: 10px;
@@ -251,6 +251,39 @@ html {
                 color: $yellowDark;
                 padding: 7px 26px;
                 border-color: $yellowDark;
+            }
+
+            .question-container {
+                margin-top: 50px;
+                padding-bottom: 100px;
+
+                p {
+                    font-size: 1.4em;
+                    margin-bottom: 20px;
+                }
+
+                .answer-container {
+                    margin: 5px 0;
+                    font-size: .8em;
+
+                    .btn-roulette {
+                        min-width: 100px;
+                        display: inline-block;
+                        max-width: 200px;
+                    }
+                }
+
+                .field-container {
+                    margin-top: 70px;
+                }
+
+                .share-container > div {
+                    margin-top: 20px;
+                    border-bottom: 2px solid $white;
+                    padding: 20px 0 10px;
+                    cursor: pointer;
+                    margin-right: 10px;
+                }
             }
         }
 

@@ -20,7 +20,6 @@ class DefaultController extends Controller
 
         $user = $this->getUser();
         return $this->render('default/dashboard.html.twig');
-
     }
 
     /**
