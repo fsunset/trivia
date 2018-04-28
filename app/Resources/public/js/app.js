@@ -62,10 +62,10 @@ $(document).ready(function() {
 	});
 
 	$startRouletteBtn.on("click", function() {
-		$roulette.attr("src", $rouletteGIFPath);
+		$roulette.attr('style', 'width:326px!important; margin-top:78px; margin-bottom:63px').attr("src", $rouletteGIFPath);
 	});
 
 	$stopRouletteBtn.on("click", function() {
-		$roulette.attr("src", $roulettePNGPath);
+		$roulette.attr('style', ' ').attr("src", $roulettePNGPath);
 	});
 });

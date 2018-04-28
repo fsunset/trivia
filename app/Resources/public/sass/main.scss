@@ -67,6 +67,12 @@ html {
             background-repeat: no-repeat;
             padding-top: 60px;
 
+            .alert-custom {
+                background: $blackTransparentMedium;
+                font-size: 1.1em;
+                border-radius: 0;
+            }
+
             li, span {
                 color: $white !important;
             }
