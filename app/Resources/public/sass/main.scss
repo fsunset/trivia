@@ -12,13 +12,15 @@ $bgImage: '../../../../web/img/bg.jpg';
 * Colour Vars
  */
 $blueDark: #041625;
+$blue: #399abe;
+$blueSoft: #39bde0;
 $yellowDark: #f8bb43;
-$white: white;
 $black: black;
 $blackTransparent: rgba($black, 0);
-$blackTransparentLight: rgba($black, .2);
+$blackTransparentLight: rgba($black, .25);
 $blackTransparentMedium: rgba($black, .5);
 $greySoft: #f5f5f5;
+$white: white;
 
 /*
 * Other Vars
@@ -71,12 +73,6 @@ html {
 
             .loader-container img {
                 width: 60px;
-            }
-
-            .alert-custom {
-                background: $blackTransparentMedium;
-                font-size: 1.1em;
-                border-radius: 0;
             }
 
             .player-name {
@@ -151,6 +147,12 @@ html {
         .container {
             position: relative;
 
+            .alert-custom {
+                background: $blackTransparentMedium;
+                font-size: 1.1em;
+                border-radius: 0;
+            }
+
             .info {
                 background: $blackTransparentMedium;
                 border-radius: 9%;
@@ -176,7 +178,8 @@ html {
                 width: 100%;
             }
 
-            .play {
+            .play,
+            .form-container {
                 text-align: center;
                 margin-bottom: 15%;
 
@@ -379,8 +382,50 @@ html {
             }
         }
 
-        form input {
-            color: $blueDark !important;
+        form {
+            margin-top: 50px;
+
+            &.fos_user_registration_register {
+                margin-bottom: 50px;
+
+                .form-group {
+                    margin-bottom: 8px;
+
+                    ul {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            input[type=text],
+            input[type=password],
+            input[type=number],
+            input[type=email] {
+                text-align: center;
+                background: $blackTransparentLight;
+                padding: 6px 0;
+                border-radius: 50px;
+                width: 85%;
+                color: $white !important;
+                border-width: 1px;
+            }
+
+            .btn-submit {
+                background: $blueSoft;
+                border: none;
+                padding: 9px 15px;
+                margin-bottom: 20px;
+                border-radius: 50px;
+                width: 160px;
+                font-size: 1.1em;
+
+                .glyphicon {
+                    background: $blue;
+                    padding: 5px;
+                    border-radius: 50%;
+                    margin-top: -3px;
+                }
+            }
         }
 
         @media only screen and (max-width: 767px) {
@@ -411,6 +456,12 @@ html {
 
                 .player-info > div {
                     float: right;
+                }
+
+                &.register-container {
+                    .roulette {
+                        width: 60%;
+                    }
                 }
             }
         }
