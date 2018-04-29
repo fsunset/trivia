@@ -45,6 +45,8 @@
         <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
 
+        {% include 'Partials/buyModal.html.twig' %}
+
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
             {% include 'Partials/rankingModal.html.twig' %}
         {% endif %}

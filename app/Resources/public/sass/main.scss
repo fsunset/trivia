@@ -11,9 +11,13 @@ $bgImage: '../../../../web/img/bg.jpg';
 /*
 * Colour Vars
  */
+$red: #dc3545;
 $blueDark: #041625;
 $blue: #399abe;
 $blueSoft: #39bde0;
+$bluePiscilago: #003d7e;
+$blueClubes: #3f94cd;
+$yellowHoteles: #f7b720;
 $yellowDark: #f8bb43;
 $black: black;
 $blackTransparent: rgba($black, 0);
@@ -34,13 +38,27 @@ html {
     position: relative;
     min-height: 100%;
 
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: $yellowDark !important;
+    }
+
     /*
     * Modals
      */
+    .modal-backdrop.in {
+        opacity: .7 !important;
+    }
+
     .modal {
         .modal-header {
             border: none;
             background: $blueDark;
+
+            .close {
+                margin: 6px 0 0 10px;
+
+                > span { color: $white !important; }
+            }
 
             .modal-title {
                 font-size: 2em;
@@ -53,11 +71,16 @@ html {
 
             .modal-brand {
                 width: 180px;
+                max-width: 45%;
                 height: auto;
                 position: absolute;
                 left: 20px;
                 top: -3px;
                 z-index: 99;
+
+                &.margin-top-17 {
+                    margin-top: 17px;
+                }
             }
         }
 
@@ -104,11 +127,29 @@ html {
                     margin-bottom: 5px;
                 }
             }
-        }
-    }
 
-    .modal-backdrop.in {
-        opacity: .7 !important;
+            .logo-container {
+                margin-top: 10px;
+                padding: 10px;
+                height: 170px;
+
+                &.logo-piscilago-container { background: $bluePiscilago; }
+                &.logo-cubo-container { background: $black; }
+                &.logo-hoteles-container { background: $yellowHoteles; }
+                &.logo-clubes-container { background: $blueClubes; }
+
+                .img-responsive {
+                    margin: auto;
+                    max-height: 100%;
+                }
+            }
+
+            .url-container {
+                background: $blackTransparentMedium;
+                padding: 5px;
+                font-size: 1.15em;
+            }
+        }
     }
 
 
@@ -399,6 +440,7 @@ html {
 
                     ul {
                         margin-bottom: 0;
+                        color: #dc3545;
                     }
                 }
             }
@@ -432,9 +474,79 @@ html {
                     margin-top: -3px;
                 }
             }
+
+            // Styling Checkbox
+            // .checkbox-container {
+            //     > label.required {
+            //         vertical-align: top;
+            //         margin: 8px 10px 0 0;
+            //     }
+
+            //     .switch {
+            //         position: relative;
+            //         display: inline-block;
+            //         width: 60px;
+            //         height: 34px;
+
+            //         input {
+            //             display:none;
+            //         }
+            //     }
+
+            //     .slider {
+            //         position: absolute;
+            //         cursor: pointer;
+            //         top: 0;
+            //         left: 0;
+            //         right: 0;
+            //         bottom: 0;
+            //         background-color: #ccc;
+            //         -webkit-transition: .4s;
+            //         transition: .4s;
+
+            //         &:before {
+            //             position: absolute;
+            //             content: "";
+            //             height: 26px;
+            //             width: 26px;
+            //             left: 4px;
+            //             bottom: 4px;
+            //             background-color: white;
+            //             -webkit-transition: .4s;
+            //             transition: .4s;
+            //         }
+
+            //         &.round {
+            //             border-radius: 34px;
+
+            //             &:before {
+            //                 border-radius: 50%;
+            //             }
+            //         }
+            //     }
+
+            //     input[type=checkbox] {
+            //         &:checked + .slider {
+            //             background-color: $blueSoft;
+            //         }
+
+            //         &:focus + .slider {
+            //             box-shadow: 0 0 1px $blueSoft;
+            //         }
+
+            //         &:checked + .slider:before {
+            //             -webkit-transform: translateX(26px);
+            //             -ms-transform: translateX(26px);
+            //             transform: translateX(26px);
+            //         }
+            //     }
+            // }
         }
 
         @media only screen and (max-width: 767px) {
+            .modal .modal-header .modal-title {
+                font-size: 1.6em;
+            }
             .footer .text-right {
                 padding-top: 8%;
             }

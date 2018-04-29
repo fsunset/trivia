@@ -9,11 +9,18 @@ require("bootstrap-sass");
 $(document).ready(function() {
 	let
 		// Globals
+		$buyModalBtn = $("#buyModalBtn"),
+		$buyModal = $("#buyModal"),
 		$rankingModalBtn = $("#rankingModalBtn"),
 		$rankingModal = $("#rankingModal"),
 		$rankingList = $("#rankingList"),
 		thisUserId = $rankingList.attr("data-this-user"),
 		$totalUsers = $("#totalUsers"),
+
+		// Register Form
+		$registrationForm = $("#fosUserRegistrationRegister"),
+		$isAssociatedCheckbox  = $("#fos_user_registration_form_isAssociated"),
+		$acceptedTermsCheckbox  = $("#fos_user_registration_form_acceptedTerms"),
 
 		// Player Dashboard
 		$roulette = $("#roulette"),
@@ -22,6 +29,12 @@ $(document).ready(function() {
 		$startRouletteBtn = $("#startRoulette"),
 		$stopRouletteBtn = $("#stopRoulette")
 		;
+
+	$buyModalBtn.on("click", function(e) {
+		e.preventDefault();
+
+		$buyModal.modal("show");
+	});
 
 	$rankingModalBtn.on("click", function(e) {
 		e.preventDefault();
