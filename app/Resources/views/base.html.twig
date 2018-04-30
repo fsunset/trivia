@@ -49,6 +49,7 @@
         {% include 'Partials/termsModal.html.twig' %}
 
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            {% include 'Partials/inviteModal.html.twig' %}
             {% include 'Partials/rankingModal.html.twig' %}
         {% endif %}
     </body>
