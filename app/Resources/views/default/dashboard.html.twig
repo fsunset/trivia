@@ -7,14 +7,9 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-6 text-right">
-                <span id="startRoulette" class="btn-roulette btn-roulette-yellow">
+            <div id="rouletteBtnContainer" class="col-xs-12 text-center">
+                <span id="startStopRouletteBtn" data-static="true" data-loader="{{ asset('img/gif/loader.gif') }}" class="btn-roulette btn-roulette-yellow" >
                     Jugar
-                </span>
-            </div>
-            <div class="col-xs-6 text-left">
-                <span id="stopRoulette" class="btn-roulette">
-                    Detener
                 </span>
             </div>
             <div class="col-xs-12 time-left">
@@ -26,39 +21,20 @@
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-2 text-center question-container">
-        <div class="row">
+        <div id="questionTitle" class="row">
             <p>
-                ¿A cuántos mundiales ha asistido la selección de Bélgica?
+                ¡Comienza a jugar ahora!
             </p>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12 text-center answer-container">
-                <span id="" class="btn-roulette">
-                    13
-                </span>
-            </div>
-            <div class="col-xs-12 text-center answer-container">
-                <span id="" class="btn-roulette">
-                    6
-                </span>
-            </div>
-            <div class="col-xs-12 text-center answer-container">
-                <span id="" class="btn-roulette">
-                    10
-                </span>
-            </div>
-        </div>
+        <div id="questionAnswers" class="row"></div>
 
         <div class="row field-container">
             <img id="roulette" src="{{ asset('img/field.png') }}" class="roulette" alt="Campo">
         </div>
 
-        <div class="row share-container">
-            <div class="col-xs-5 col-sm-4 col-xs-offset-1 text-center">
-                Volver a Jugar
-            </div>
-            <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-sm-offset-2 text-center">
+        <div id="shareContainer" class="row share-container">
+            <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-xs-offset-1 text-center">
                 Invitar Amigos
             </div>
         </div>
