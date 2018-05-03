@@ -28,7 +28,7 @@ $(document).ready(function() {
 		$roulette = $("#roulette"),
 		$roulettePNGPath = $roulette.attr("src"),
 		$rouletteGIFPath = $roulette.attr("data-src"),
-		$startStopRouletteBtn = $("#startStopRouletteBtn"),
+		hours = 0,
 
 		// Random Questions
 		$questionTitle = $("#questionTitle"),
@@ -37,9 +37,50 @@ $(document).ready(function() {
 		$rouletteBtnContainer = $("#rouletteBtnContainer"),
 		$shareContainer = $("#shareContainer"),
 		answerId = "",
-		loaderPath = $startStopRouletteBtn.attr("data-loader"),
+		loaderPath = "/img/gif/loader.gif",
 		htmlLoader = "<p class='loader-container'><img src=" + loaderPath + " alt='Cargando...'></p>"
 		;
+
+	getUserInfo();
+
+	// Get User Info for Answered Questions and Last Login
+	function getUserInfo() {
+		$.ajax({
+			url: "/userInfo",
+			method: "post",
+			data: {},
+			type: "json",
+			success: function(userInfo) {
+				let lastLoginTime = 0,
+					currentDate = new Date();
+
+				userInfo = JSON.parse(userInfo);
+				// Removing 7 hours for CEST vs Bogotá Time
+				lastLoginTime = new Date(userInfo.lastLogin.date).getTime() - (7 * 60 * 60 * 1000);
+				hours = Math.abs(currentDate.getTime() - lastLoginTime) / 3600000;
+
+console.log('hours: ' + hours);
+console.log('answeredQuestions: ' + userInfo.answeredQuestions);
+
+				if (userInfo.answeredQuestions > 2) {
+					if (hours < 24) {
+						$rouletteBtnContainer.html('');
+						$questionTitle.html("<p>Ya respondiste las 3 pregunta de hoy, ¡en 24 horas podrás seguir ganando!</p>");
+					} else {
+// ********
+// INSERT HERE THE CODE FOR NEW VALUE FOR Answered Questions!!
+// ********
+						$rouletteBtnContainer.html('<span id="startStopRouletteBtn" data-static="true" data-loader="/img/gif/loader.gif" class="btn-roulette btn-roulette-yellow"> Jugar </span>');
+					}
+				} else {
+					$rouletteBtnContainer.html('<span id="startStopRouletteBtn" data-static="true" data-loader="/img/gif/loader.gif" class="btn-roulette btn-roulette-yellow"> Jugar </span>');
+				}
+			},
+			error: function(error) {
+				console.error("An unhandled error occurred in ajax success callback: " + error);
+			}
+		});
+	}
 
 	// Random Questions
 	function randomQuestion(htmlLoader) {
@@ -84,17 +125,34 @@ $(document).ready(function() {
 	$questionAnswers.on("click", ".btn-roulette", function() {
 		let $this = $(this),
 			id = $this.attr("id"),
-			message = id == answerId ? "¡Ganaste 5 Balones! <br> Continua Jugando" : "Continua Jugando";;
+			message = id == answerId ? "¡Ganaste 5 Balones! <br> Continua Jugando" : "Continua Jugando";
+
+		$.ajax({
+			url: "/saveAnswer",
+			method: "post",
+			data: {},
+			type: "json",
+			success: function(data) {
+				if (JSON.parse(data).status == "block") {
+					$rouletteBtnContainer.html("");
+					message = "Ya respondiste las 3 pregunta de hoy, ¡en 24 horas podrás seguir ganando!";
+				} else {
+					$rouletteBtnContainer.html('<span id="startStopRouletteBtn" data-static="true" data-loader="' + loaderPath + '" class="btn-roulette btn-roulette-yellow"> Jugar </span>');
+				}
+			},
+			error: function(error) {
+				console.error("An unhandled error occurred in ajax success callback: " + error);
+			}
+		});
 
 		clearInterval(countDownInterval);
 		$countDownContainer.html(" ");
+
 		resetQuestion();
+
 		setTimeout(function(){
 			$questionTitle.html("<p>" + message + "</p>");
 		}, 1750);
-
-		console.log(id);
-		console.log(answerId);
 	});
 
 	function resetQuestion() {
@@ -103,7 +161,7 @@ $(document).ready(function() {
 		$("#changeQuestion").remove();
 	}
 
-	$startStopRouletteBtn.on("click", function() {
+	$rouletteBtnContainer.on("click", "#startStopRouletteBtn", function() {
 		let $this = $(this);
 
 		if ($this.attr('data-static')) {
@@ -149,7 +207,6 @@ $(document).ready(function() {
 		let $this = $(this),
 			$url = $this.attr("data-url"),
 			$htmlcontent = "",
-			loaderPath = $this.attr("data-loader"),
 			htmlLoader = "<li class='text-center loader-container'><img src=" + loaderPath + " alt='Cargando...'></li>",
 			totalUsers = 0,
 			userClassHeader = "";

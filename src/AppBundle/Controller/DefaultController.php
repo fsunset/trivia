@@ -18,13 +18,73 @@ class DefaultController extends Controller
             return $this->render('default/index.html.twig');
         }
 
-        return $this->render('default/dashboard.html.twig');
+        $user = $this->getUser();
+        $answeredQuestions = $user->getAnsweredQuestions();
+
+        return $this->render('default/dashboard.html.twig', array('answeredQuestions' => $answeredQuestions));
+    }
+
+    /**
+     * @Route("/userInfo", name="userInfo")
+     */
+    public function userInfoAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            $user = $this->getUser();
+
+            $answeredQuestions = $user->getAnsweredQuestions();
+            $lastLogin = $user->getLastLogin();
+            $userInfo = array('answeredQuestions' => $answeredQuestions, 'lastLogin' => $lastLogin);
+
+            return new Response(
+                json_encode($userInfo)
+            , 200);
+        }
+
+        throw new Exception("Error; la petición debe ser XmlHttp", 1);
+    }
+
+    /**
+     * @Route("/saveAnswer", name="saveAnswer")
+     */
+    public function saveAnswerAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            $user = $this->getUser();
+            $status = 'free';
+
+            $em = $this->getDoctrine()->getManager();
+
+            $user->setAnsweredQuestions($user->getAnsweredQuestions() + 1);
+            $em->persist($user);
+            $em->flush();
+
+            if ($user->getAnsweredQuestions() > 2) {
+                $status = 'block';
+            }
+
+            return new Response(
+                json_encode(array('status' => $status))
+            , 200);
+        }
+
+        throw new Exception("Error; la petición debe ser XmlHttp", 1);
     }
 
     /**
      * @Route("/randomQuestion", name="randomQuestion")
      */
     public function randomQuestionAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
+
         if ($request->isXmlHttpRequest()) {
             $randomId = rand(0, 29);
 
@@ -47,6 +107,10 @@ class DefaultController extends Controller
      * @Route("/ranking", name="ranking")
      */
     public function rankingAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
+
         if ($request->isXmlHttpRequest()) {
             $totalUsers = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
             $users = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC', 'id' => 'ASC'), 10);

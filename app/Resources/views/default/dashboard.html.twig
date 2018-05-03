@@ -8,9 +8,6 @@
 
         <div class="row">
             <div id="rouletteBtnContainer" class="col-xs-12 text-center">
-                <span id="startStopRouletteBtn" data-static="true" data-loader="{{ asset('img/gif/loader.gif') }}" class="btn-roulette btn-roulette-yellow" >
-                    Jugar
-                </span>
             </div>
             <div class="col-xs-12 time-left">
                 <p>
@@ -23,7 +20,11 @@
     <div class="col-xs-12 col-sm-4 col-sm-offset-2 text-center question-container">
         <div id="questionTitle" class="row">
             <p>
-                ¡Comienza a jugar ahora!
+                {% if answeredQuestions > 2 %}
+                    Ya respondiste las 3 pregunta de hoy, ¡en 24 horas podrás seguir ganando!
+                {% else %}
+                    ¡Comienza a jugar ahora!
+                {% endif %}
             </p>
         </div>
 

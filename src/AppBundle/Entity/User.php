@@ -72,6 +72,13 @@ class User extends BaseUser {
      */
     protected $score = 5;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="answeredQuestions", type="integer")
+     */
+    protected $answeredQuestions = 0;
+
 
     public function __construct() {
         parent::__construct();
@@ -237,5 +244,28 @@ class User extends BaseUser {
     public function getScore()
     {
         return $this->score;
+    }
+
+    /**
+     * Set the value of answeredQuestions.
+     *
+     * @param string $answeredQuestions
+     * @return \AppBundle\Entity\User
+     */
+    public function setAnsweredQuestions($answeredQuestions)
+    {
+        $this->answeredQuestions = $answeredQuestions;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of answeredQuestions.
+     *
+     * @return string
+     */
+    public function getAnsweredQuestions()
+    {
+        return $this->answeredQuestions;
     }
 }
