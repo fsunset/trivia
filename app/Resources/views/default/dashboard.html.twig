@@ -9,19 +9,28 @@
         <div class="row">
             <div id="rouletteBtnContainer" class="col-xs-12 text-center">
             </div>
-            <div class="col-xs-12 time-left">
+            <div id="timeLeftContainer" class="col-xs-12 time-left hide">
                 <p>
-                    En <span>23:59</span> horas tendrás 3 oportunidades
+                    En <span id="timeLeft">23:59</span> hora(s) tendrás 3 oportunidades para ganar
                 </p>
             </div>
         </div>
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-2 text-center question-container">
+        {% if isFirstUser %}
+            <div class="alert alert-custom">
+                <button type="button" class="close pull-right" data-dismiss="alert" aria-label="Close" style="margin-top: -2px;">
+                    <span aria-hidden="true" style="color: white;">×</span>
+                </button>
+                ¡Estás liderando del juego! No pares de ganar
+            </div>
+        {% endif %}
+
         <div id="questionTitle" class="row">
             <p>
                 {% if answeredQuestions > 2 %}
-                    Ya respondiste las 3 pregunta de hoy, ¡en 24 horas podrás seguir ganando!
+                    Ya respondiste las 3 preguntas de hoy.
                 {% else %}
                     ¡Comienza a jugar ahora!
                 {% endif %}
@@ -35,7 +44,7 @@
         </div>
 
         <div id="shareContainer" class="row share-container">
-            <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-xs-offset-1 text-center">
+            <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-xs-offset-4 text-center">
                 Invitar Amigos
             </div>
         </div>

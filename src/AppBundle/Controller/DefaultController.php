@@ -21,7 +21,12 @@ class DefaultController extends Controller
         $user = $this->getUser();
         $answeredQuestions = $user->getAnsweredQuestions();
 
-        return $this->render('default/dashboard.html.twig', array('answeredQuestions' => $answeredQuestions));
+        $firstUser = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC'), 1);
+
+        return $this->render('default/dashboard.html.twig', array(
+            'answeredQuestions' => $answeredQuestions,
+            'isFirstUser' => $firstUser[0]->getId() == $user->getId()
+        ));
     }
 
     /**
@@ -56,12 +61,18 @@ class DefaultController extends Controller
         }
 
         if ($request->isXmlHttpRequest()) {
+            $correctAnswer = $request->request->get('correctAnswer');
             $user = $this->getUser();
             $status = 'free';
 
             $em = $this->getDoctrine()->getManager();
 
             $user->setAnsweredQuestions($user->getAnsweredQuestions() + 1);
+
+            if ($correctAnswer == 'true') {
+                $user->setScore($user->getScore() + 10);
+            }
+
             $em->persist($user);
             $em->flush();
 
@@ -70,7 +81,7 @@ class DefaultController extends Controller
             }
 
             return new Response(
-                json_encode(array('status' => $status))
+                json_encode(array('status' => $status, 'score' => $user->getScore()))
             , 200);
         }
 

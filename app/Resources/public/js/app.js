@@ -29,6 +29,12 @@ $(document).ready(function() {
 		$roulettePNGPath = $roulette.attr("src"),
 		$rouletteGIFPath = $roulette.attr("data-src"),
 		hours = 0,
+		$timeLeftContainer = $("#timeLeftContainer"),
+		$timeLeft = $("#timeLeft"),
+		$hoursMinsLeft = 0,
+		$hoursLeft = 0,
+		$minsLeft = 0,
+		$playerScore = $("#playerScore"),
 
 		// Random Questions
 		$questionTitle = $("#questionTitle"),
@@ -59,21 +65,26 @@ $(document).ready(function() {
 				lastLoginTime = new Date(userInfo.lastLogin.date).getTime() - (7 * 60 * 60 * 1000);
 				hours = Math.abs(currentDate.getTime() - lastLoginTime) / 3600000;
 
-console.log('hours: ' + hours);
-console.log('answeredQuestions: ' + userInfo.answeredQuestions);
+				console.log(hours);
+				console.log(userInfo.answeredQuestions);
+
+				$hoursMinsLeft = 24 - hours;
+				$hoursLeft = parseInt($hoursMinsLeft);
+				$minsLeft = $hoursMinsLeft - $hoursLeft;
+				$minsLeft = $minsLeft * 60;
 
 				if (userInfo.answeredQuestions > 2) {
 					if (hours < 24) {
-						$rouletteBtnContainer.html('');
-						$questionTitle.html("<p>Ya respondiste las 3 pregunta de hoy, ¡en 24 horas podrás seguir ganando!</p>");
+						$rouletteBtnContainer.html("");
+						$questionTitle.html("<p>Ya respondiste las 3 preguntas de hoy.</p>");
+
+						$timeLeft.html($hoursLeft + ":" + parseInt($minsLeft));
+						$timeLeftContainer.removeClass("hide");
 					} else {
-// ********
-// INSERT HERE THE CODE FOR NEW VALUE FOR Answered Questions!!
-// ********
-						$rouletteBtnContainer.html('<span id="startStopRouletteBtn" data-static="true" data-loader="/img/gif/loader.gif" class="btn-roulette btn-roulette-yellow"> Jugar </span>');
+						$rouletteBtnContainer.html("<span id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' class='btn-roulette btn-roulette-yellow'> Jugar </span>");
 					}
 				} else {
-					$rouletteBtnContainer.html('<span id="startStopRouletteBtn" data-static="true" data-loader="/img/gif/loader.gif" class="btn-roulette btn-roulette-yellow"> Jugar </span>');
+					$rouletteBtnContainer.html("<span id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' class='btn-roulette btn-roulette-yellow'> Jugar </span>");
 				}
 			},
 			error: function(error) {
@@ -103,8 +114,6 @@ console.log('answeredQuestions: ' + userInfo.answeredQuestions);
 
 					answerId = question.answer;
 				});
-
-				$shareContainer.append('<div id="changeQuestion" class="col-xs-5 col-sm-4 col-sm-offset-2 text-center"> Cambiar Pregunta </div>');
 			},
 			error: function(error) {
 				console.error("An unhandled error occurred in ajax success callback: " + error);
@@ -114,31 +123,42 @@ console.log('answeredQuestions: ' + userInfo.answeredQuestions);
 
 	// Get the Count Down
 	function countDown() {
-    	var i = 10;
-    	countDownInterval = setInterval(function() {
-	        if (i == 0) clearInterval(this);
-	        else $countDownContainer.html("<p class='count-down-container'>" + i-- + "</p>");
-	    }, 1000);
+		let i = 10;
+
+		countDownInterval = setInterval(function() {
+			if (i == 0) {
+				clearInterval(this);
+				$questionTitle.html("");
+				$questionAnswers.html("");
+				$countDownContainer.html("");
+			} else {
+				$countDownContainer.html("<p class='count-down-container'>" + i-- + "</p>");
+			}
+		}, 1000);
 	}
 
 	// Answering Questions
 	$questionAnswers.on("click", ".btn-roulette", function() {
 		let $this = $(this),
 			id = $this.attr("id"),
-			message = id == answerId ? "¡Ganaste 5 Balones! <br> Continua Jugando" : "Continua Jugando";
+			correctAnswer = id == answerId,
+			message = correctAnswer ? "¡Ganaste 10 Balones! <br> Continua Jugando" : "Continua Jugando";
 
 		$.ajax({
 			url: "/saveAnswer",
 			method: "post",
-			data: {},
+			data: { correctAnswer : correctAnswer },
 			type: "json",
 			success: function(data) {
 				if (JSON.parse(data).status == "block") {
+					getUserInfo();
 					$rouletteBtnContainer.html("");
-					message = "Ya respondiste las 3 pregunta de hoy, ¡en 24 horas podrás seguir ganando!";
+					message = "Ya respondiste las 3 preguntas de hoy.";
 				} else {
-					$rouletteBtnContainer.html('<span id="startStopRouletteBtn" data-static="true" data-loader="' + loaderPath + '" class="btn-roulette btn-roulette-yellow"> Jugar </span>');
+					$rouletteBtnContainer.html("<span id='startStopRouletteBtn' data-static='true' data-loader=" + loaderPath + " class='btn-roulette btn-roulette-yellow'> Jugar </span>");
 				}
+
+				$playerScore.html(JSON.parse(data).score);
 			},
 			error: function(error) {
 				console.error("An unhandled error occurred in ajax success callback: " + error);
@@ -146,9 +166,9 @@ console.log('answeredQuestions: ' + userInfo.answeredQuestions);
 		});
 
 		clearInterval(countDownInterval);
-		$countDownContainer.html(" ");
 
 		resetQuestion();
+		$countDownContainer.html("");
 
 		setTimeout(function(){
 			$questionTitle.html("<p>" + message + "</p>");
@@ -157,21 +177,20 @@ console.log('answeredQuestions: ' + userInfo.answeredQuestions);
 
 	function resetQuestion() {
 		$questionTitle.html(htmlLoader);
-		$questionAnswers.html('');
-		$("#changeQuestion").remove();
+		$questionAnswers.html("");
 	}
 
 	$rouletteBtnContainer.on("click", "#startStopRouletteBtn", function() {
 		let $this = $(this);
 
-		if ($this.attr('data-static')) {
+		if ($this.attr("data-static")) {
 			$roulette
 				.attr("style", "width:326px!important; margin-top:78px; margin-bottom:63px")
 				.attr("src", $rouletteGIFPath);
 
 			$this
-				.removeAttr('data-static')
-				.text('Detener');
+				.removeAttr("data-static")
+				.text("Detener");
 
 			resetQuestion();
 		} else {
@@ -180,12 +199,12 @@ console.log('answeredQuestions: ' + userInfo.answeredQuestions);
 				.attr("src", $roulettePNGPath);
 
 			$this
-				.attr('data-static', true)
-				.text('Jugar');
+				.attr("data-static", true)
+				.text("Jugar");
 
-			$countDownContainer.html('<p class="count-down-container">10</p>');
+			$countDownContainer.html("<p class='count-down-container'>10</p>");
 			randomQuestion(htmlLoader);
-			$rouletteBtnContainer.html('');
+			$rouletteBtnContainer.html("");
 		}
 	});
 
