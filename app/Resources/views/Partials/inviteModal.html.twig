@@ -10,9 +10,27 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta perferendis vero laudantium inventore asperiores obcaecati quas natus deserunt, nihil veniam ducimus facere, adipisci harum ex. Iusto modi cumque placeat eligendi?
-                    </p>
+                    <div class="alert alert-custom">
+                        Puedes invitar hasta 3 amigos, ¡ganarás 5 balones por cada uno!
+                    </div>
+
+                    <form method="post" action="{{ path('share') }}" id="share-form" class="text-center">
+                        <div class="form-group">
+                            <input type="email" id="shareFormEmail1" name="shareFormEmail1" required="required" placeholder="Primer Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="shareFormEmail2" name="shareFormEmail2" placeholder="Segundo Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="shareFormEmail3" name="shareFormEmail3" placeholder="Tercer Email">
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-submit">
+                                Invitar
+                                <span class="glyphicon glyphicon-ok pull-right"></span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -30,6 +30,40 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/share", name="share")
+     */
+    public function shareAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
+
+        $emailsToShare = $request->request->all();
+        $user = $this->getUser();
+
+        $recipients = array();
+        foreach ($emailsToShare as $email) {
+            if ($email != '')
+                array_push($recipients, $email);
+        }
+
+        // Send Share Email(s)
+        $message = (new \Swift_Message('¡Has sido convocado a la Ruleta Mundialista Colsubsidio!'))
+            ->setFrom('francisco.acendra@gmail.com')
+            ->setTo($recipients)
+            ->setBody(
+                $this->renderView(
+                    'Emails/share.html.twig',
+                    array('user' => $user)
+                ),
+                'text/html'
+            )
+        ;
+        $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
      * @Route("/userInfo", name="userInfo")
      */
     public function userInfoAction(Request $request) {
