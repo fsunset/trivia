@@ -20,9 +20,12 @@ $(document).ready(function() {
 		$totalUsers = $("#totalUsers"),
 
 		// Register Form
-		$registrationForm = $("#fosUserRegistrationRegister"),
+		$fosUserRegistrationForm = $("#fosUserRegistrationForm"),
 		$isAssociatedCheckbox  = $("#fos_user_registration_form_isAssociated"),
 		$acceptedTermsCheckbox  = $("#fos_user_registration_form_acceptedTerms"),
+		$isAssociatedStyledCheckbox  = $("#isAssociatedStyledCheckbox"),
+		$acceptedTermsStyledCheckbox  = $("#acceptedTermsStyledCheckbox"),
+		$termsErrorContainer = $("#termsErrorContainer"),
 
 		// Player Dashboard
 		$roulette = $("#roulette"),
@@ -41,13 +44,44 @@ $(document).ready(function() {
 		$questionAnswers = $("#questionAnswers"),
 		$countDownContainer = $("#countDownContainer"),
 		$rouletteBtnContainer = $("#rouletteBtnContainer"),
-		$shareContainer = $("#shareContainer"),
+		// $shareContainer = $("#shareContainer"),
 		answerId = "",
 		loaderPath = "/img/gif/loader.gif",
 		htmlLoader = "<p class='loader-container'><img src=" + loaderPath + " alt='Cargando...'></p>"
 		;
 
 	getUserInfo();
+
+	$fosUserRegistrationForm.on("submit", function() {
+		let empty = $(this).find("input").filter(function() {
+			return this.value === "";
+		});
+
+
+		if (empty.length == 0) {
+			if ($acceptedTermsCheckbox.attr("checked")) {
+				$termsErrorContainer.addClass("hide");
+				return true;
+			} else {
+				$termsErrorContainer.removeClass("hide");
+				return false;
+			}
+		}
+
+		return false;
+	});
+
+	// For styles checkboxes
+	$isAssociatedCheckbox.attr("checked", false);
+	$acceptedTermsCheckbox.attr("checked", false);
+
+	$isAssociatedStyledCheckbox.on("click", ".slider", function() {
+		$isAssociatedCheckbox.attr("checked", !$isAssociatedCheckbox.attr("checked"));
+	});
+
+	$acceptedTermsStyledCheckbox.on("click", ".slider", function() {
+		$acceptedTermsCheckbox.attr("checked", !$acceptedTermsCheckbox.attr("checked"));
+	});
 
 	// Get User Info for Answered Questions and Last Login
 	function getUserInfo() {

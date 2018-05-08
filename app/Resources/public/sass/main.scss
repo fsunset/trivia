@@ -506,71 +506,72 @@ html {
             }
 
             // Styling Checkbox
-            // .checkbox-container {
-            //     > label.required {
-            //         vertical-align: top;
-            //         margin: 8px 10px 0 0;
-            //     }
+            .checkbox-container {
+                > label.required,
+                > label:first-child {
+                    vertical-align: top;
+                    margin: 8px 10px 0 0;
+                }
 
-            //     .switch {
-            //         position: relative;
-            //         display: inline-block;
-            //         width: 60px;
-            //         height: 34px;
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 60px;
+                    height: 34px;
 
-            //         input {
-            //             display:none;
-            //         }
-            //     }
+                    input {
+                        display:none;
+                    }
+                }
 
-            //     .slider {
-            //         position: absolute;
-            //         cursor: pointer;
-            //         top: 0;
-            //         left: 0;
-            //         right: 0;
-            //         bottom: 0;
-            //         background-color: #ccc;
-            //         -webkit-transition: .4s;
-            //         transition: .4s;
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: .4s;
+                    transition: .4s;
 
-            //         &:before {
-            //             position: absolute;
-            //             content: "";
-            //             height: 26px;
-            //             width: 26px;
-            //             left: 4px;
-            //             bottom: 4px;
-            //             background-color: white;
-            //             -webkit-transition: .4s;
-            //             transition: .4s;
-            //         }
+                    &:before {
+                        position: absolute;
+                        content: "";
+                        height: 26px;
+                        width: 26px;
+                        left: 4px;
+                        bottom: 4px;
+                        background-color: white;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                    }
 
-            //         &.round {
-            //             border-radius: 34px;
+                    &.round {
+                        border-radius: 34px;
 
-            //             &:before {
-            //                 border-radius: 50%;
-            //             }
-            //         }
-            //     }
+                        &:before {
+                            border-radius: 50%;
+                        }
+                    }
+                }
 
-            //     input[type=checkbox] {
-            //         &:checked + .slider {
-            //             background-color: $blueSoft;
-            //         }
+                input[type=checkbox].styled {
+                    &:checked + .slider {
+                        background-color: $blueSoft;
+                    }
 
-            //         &:focus + .slider {
-            //             box-shadow: 0 0 1px $blueSoft;
-            //         }
+                    &:focus + .slider {
+                        box-shadow: 0 0 1px $blueSoft;
+                    }
 
-            //         &:checked + .slider:before {
-            //             -webkit-transform: translateX(26px);
-            //             -ms-transform: translateX(26px);
-            //             transform: translateX(26px);
-            //         }
-            //     }
-            // }
+                    &:checked + .slider:before {
+                        -webkit-transform: translateX(26px);
+                        -ms-transform: translateX(26px);
+                        transform: translateX(26px);
+                    }
+                }
+            }
         }
 
 
