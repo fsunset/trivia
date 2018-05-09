@@ -11,7 +11,7 @@ $(document).ready(function() {
 		// Globals
 		$buyModalBtn = $("#buyModalBtn"),
 		$buyModal = $("#buyModal"),
-		$termsModalBtn = $("#termsModalBtn"),
+		$termsModalTriggers = $("#termsModalBtn, #termsModalLink"),
 		$termsModal = $("#termsModal"),
 		$rankingModalBtn = $("#rankingModalBtn"),
 		$rankingModal = $("#rankingModal"),
@@ -260,7 +260,7 @@ $(document).ready(function() {
 		$buyModal.modal("show");
 	});
 
-	$termsModalBtn.on("click", function(e) {
+	$termsModalTriggers.on("click", function(e) {
 		e.preventDefault();
 
 		$termsModal.modal("show");

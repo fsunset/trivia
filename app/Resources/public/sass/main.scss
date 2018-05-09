@@ -187,13 +187,15 @@ html {
         background-size: cover;
         background-repeat: no-repeat;
 
-        a {
+        a,
+        .yellow-text {
             color: $yellowDark !important;
+            cursor: pointer;
+        }
 
-            &:hover {
-                color: $white !important;
-                text-decoration: none !important;
-            }
+        a:hover {
+            color: $white !important;
+            text-decoration: none !important;
         }
 
         ol,
