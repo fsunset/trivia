@@ -79,6 +79,13 @@ class User extends BaseUser {
      */
     protected $answeredQuestions = 0;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sharedGame", type="boolean")
+     */
+    protected $sharedGame = false;
+
 
     public function __construct() {
         parent::__construct();
@@ -267,5 +274,28 @@ class User extends BaseUser {
     public function getAnsweredQuestions()
     {
         return $this->answeredQuestions;
+    }
+
+    /**
+     * Set the value of sharedGame.
+     *
+     * @param string $sharedGame
+     * @return \AppBundle\Entity\User
+     */
+    public function setSharedGame($sharedGame)
+    {
+        $this->sharedGame = $sharedGame;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sharedGame.
+     *
+     * @return string
+     */
+    public function getSharedGame()
+    {
+        return $this->sharedGame;
     }
 }

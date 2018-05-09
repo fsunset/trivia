@@ -10,7 +10,9 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <img src="{{ asset('img/logo-game.png') }}" class="navbar-brand" alt="Trivia Mundialista">
+            <a href="{{ path('homepage') }}">
+                <img src="{{ asset('img/logo-game.png') }}" class="navbar-brand" alt="Trivia Mundialista">
+            </a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse clearfix">
@@ -28,24 +30,24 @@
                     {% if path(app.request.get('_route'), app.request.get('_route_params')) == '/login' %}
                         <li>
                             <a href="{{ path('fos_user_registration_register') }}">
-                                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
+                                {{ 'Registro'|trans({}, 'FOSUserBundle') }}
                             </a>
                         </li>
                     {% elseif path(app.request.get('_route'), app.request.get('_route_params')) == '/register/' %}
                         <li>
                             <a href="{{ path('fos_user_security_login') }}">
-                                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
+                                {{ 'Login'|trans({}, 'FOSUserBundle') }}
                             </a>
                         </li>
                     {% else %}
                         <li>
                             <a href="{{ path('fos_user_registration_register') }}">
-                                {{ 'Crear mi cuenta'|trans({}, 'FOSUserBundle') }}
+                                {{ 'Registro'|trans({}, 'FOSUserBundle') }}
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('fos_user_security_login') }}">
-                                {{ 'Ya tengo una cuenta'|trans({}, 'FOSUserBundle') }}
+                                {{ 'Login'|trans({}, 'FOSUserBundle') }}
                             </a>
                         </li>
                     {% endif %}

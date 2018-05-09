@@ -43,10 +43,12 @@
             <img id="roulette" src="{{ asset('img/field.png') }}" class="roulette" alt="Campo">
         </div>
 
-        <div id="shareContainer" class="row share-container">
-            <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-xs-offset-4 text-center">
-                Invitar Amigos
+        {% if canInvite %}
+            <div id="shareContainer" class="row share-container">
+                <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-xs-offset-4 text-center">
+                    Invitar Amigos
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

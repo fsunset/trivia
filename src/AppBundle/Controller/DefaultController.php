@@ -23,9 +23,36 @@ class DefaultController extends Controller
 
         $firstUser = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array(), array('score' => 'DESC'), 1);
 
+
+        $canInvite = true;
+        $em = $this->getDoctrine()->getManager();
+        if (!is_null($user->getLastLogin())) {
+            $previousLogin = $user->getLastLogin()->getTimestamp();
+
+            $user->setLastLogin(new \DateTime());
+            $em->persist($user);
+            $em->flush();
+
+            $lastLogin = $user->getLastLogin()->getTimestamp();
+
+            $loginSpanSecs = $lastLogin - $previousLogin;
+            $loginSpanHours = $loginSpanSecs / 3600;
+            settype($loginSpanHours, "integer");
+
+            if ($loginSpanHours < 24 && $user->getSharedGame()) {
+                $canInvite = false;
+            }
+        } else {
+            $user->setLastLogin(new \DateTime());
+        }
+
+        $em->persist($user);
+        $em->flush();
+
         return $this->render('default/dashboard.html.twig', array(
             'answeredQuestions' => $answeredQuestions,
-            'isFirstUser' => $firstUser[0]->getId() == $user->getId()
+            'isFirstUser' => $firstUser[0]->getId() == $user->getId(),
+            'canInvite' => $canInvite
         ));
     }
 
@@ -60,6 +87,12 @@ class DefaultController extends Controller
         ;
         $this->get('mailer')->send($message);
 
+        $user->setSharedGame(true);
+        $user->setScore($user->getScore() + 15);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
         return $this->redirectToRoute('homepage');
     }
 
@@ -80,6 +113,29 @@ class DefaultController extends Controller
 
             return new Response(
                 json_encode($userInfo)
+            , 200);
+        }
+
+        throw new Exception("Error; la petición debe ser XmlHttp", 1);
+    }
+
+    /**
+     * @Route("/notAnswered", name="notAnswered")
+     */
+    public function notAnsweredAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render('default/index.html.twig');
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            $user = $this->getUser();
+            $user->setAnsweredQuestions($user->getAnsweredQuestions() + 1);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return new Response(
+                json_encode(array('status' => true))
             , 200);
         }
 

@@ -30,7 +30,13 @@
             </div>
 
             <div class="col-xs-12  col-sm-4 play">
-                <img src="{{ asset('img/btn-play.png') }}" class="btn-play" alt="Jugar">
+                <a href="{{ path('fos_user_security_login') }}">
+                    <img src="{{ asset('img/btn-login.png') }}" class="btn-play" alt="Jugar">
+                </a>
+
+                <a href="{{ path('fos_user_registration_register') }}">
+                    <img src="{{ asset('img/btn-register.png') }}" class="btn-play" alt="Jugar">
+                </a>
             </div>
         </div>
     </div>

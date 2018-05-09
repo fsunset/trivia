@@ -161,10 +161,22 @@ $(document).ready(function() {
 
 		countDownInterval = setInterval(function() {
 			if (i == 0) {
-				clearInterval(this);
-				$questionTitle.html("");
-				$questionAnswers.html("");
-				$countDownContainer.html("");
+				$.ajax({
+					url: "/notAnswered",
+					method: "post",
+					data: {},
+					type: "json",
+					success: function(data) {
+						location.reload();
+						// clearInterval(this);
+						// $questionTitle.html("");
+						// $questionAnswers.html("");
+						// $countDownContainer.html("");
+					},
+					error: function(error) {
+						console.error("An unhandled error occurred in ajax success callback: " + error);
+					}
+				});
 			} else {
 				$countDownContainer.html("<p class='count-down-container'>" + i-- + "</p>");
 			}
