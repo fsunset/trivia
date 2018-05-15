@@ -134,11 +134,13 @@ console.log(userInfo.answeredQuestions);
 		});
 	}
 
-	function startRoulette() {
-		$countDownContainer.html("<p class='count-down-container'>10</p>");
+	$(document).on("click", "#startStopRouletteBtn", function() {
 		randomQuestion(htmlLoader);
-		$rouletteBtnContainer.html("");
-	}
+		setTimeout(function() {
+			$countDownContainer.html("<p class='count-down-container'>10</p>");
+			$rouletteBtnContainer.html("");
+		}, 2000);
+	});
 
 	// Random Questions
 	function randomQuestion(htmlLoader) {
