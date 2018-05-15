@@ -134,6 +134,12 @@ console.log(userInfo.answeredQuestions);
 		});
 	}
 
+	function startRoulette() {
+		$countDownContainer.html("<p class='count-down-container'>10</p>");
+		randomQuestion(htmlLoader);
+		$rouletteBtnContainer.html("");
+	}
+
 	// Random Questions
 	function randomQuestion(htmlLoader) {
 		$.ajax({
@@ -195,7 +201,7 @@ console.log(userInfo.answeredQuestions);
 		let $this = $(this),
 			id = $this.attr("id"),
 			correctAnswer = id == answerId,
-			message = correctAnswer ? "¡Ganaste 10 Balones! <br> Continua Jugando" : "Continua Jugando";
+			message = correctAnswer ? "¡Ganaste 10 Balones! <br> Continúa Jugando" : "¡Te comiste el gol! <br> Continúa Jugando";
 
 		$.ajax({
 			url: "/saveAnswer",
@@ -232,34 +238,6 @@ console.log(userInfo.answeredQuestions);
 		$questionTitle.html(htmlLoader);
 		$questionAnswers.html("");
 	}
-
-	$rouletteBtnContainer.on("click", "#startStopRouletteBtn", function() {
-		let $this = $(this);
-
-		if ($this.attr("data-static")) {
-			$roulette
-				.attr("style", "width:326px!important; margin-top:78px; margin-bottom:63px")
-				.attr("src", $rouletteGIFPath);
-
-			$this
-				.removeAttr("data-static")
-				.addClass("hide");
-
-			resetQuestion();
-		} else {
-			$roulette
-				.attr("style", " ")
-				.attr("src", $roulettePNGPath);
-
-			$this
-				.attr("data-static", true)
-				.removeClass("hide");
-
-			$countDownContainer.html("<p class='count-down-container'>10</p>");
-			randomQuestion(htmlLoader);
-			$rouletteBtnContainer.html("");
-		}
-	});
 
 	$buyModalBtn.on("click", function(e) {
 		e.preventDefault();

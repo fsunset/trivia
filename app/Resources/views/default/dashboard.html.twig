@@ -8,7 +8,7 @@
         </div>
 
         <div class="row">
-            <img id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' src='/img/btn-play.png' class='btn-play' alt='Jugar' width='200' style="display:none;">
+            <img id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' src='/img/btn-play.png' class='btn-play' alt='Jugar' width='200'>
             <div id="rouletteBtnContainer" class="col-xs-12 text-center">
             </div>
             <div id="timeLeftContainer" class="col-xs-12 time-left hide">
@@ -43,7 +43,7 @@
         {% if canInvite %}
             <div id="shareContainer" class="row share-container">
                 <div data-toggle="modal" data-target="#inviteModal" class="col-xs-5 col-sm-4 col-xs-offset-4 text-center">
-                    Invitar Amigos
+                    <img src="{{ asset('img/btn-invite.png') }}" alt="Invitar Amigos" width="100%">
                 </div>
             </div>
         {% endif %}
@@ -65,7 +65,12 @@
             green,
             blue;
 
-        document.getElementById("startStopRouletteBtn").addEventListener("click", spin);
+        // document.getElementById("startStopRouletteBtn").addEventListener("click", spin);
+        document.addEventListener("click", function(e) {
+            if (e.target && e.target.id == "startStopRouletteBtn") {
+                spin();
+            }
+        })
 
         function byte2Hex(n) {
             let nybHexString = "0123456789ABCDEF";
@@ -176,6 +181,7 @@
             ctx.restore();
 
             console.log("end!");
+            startRoulette();
         }
 
         function easeOut(t, b, c, d) {
