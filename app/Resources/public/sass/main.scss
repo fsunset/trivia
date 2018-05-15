@@ -244,9 +244,29 @@ html {
             .main-logo-game {
                 width: 300px;
                 max-width: 100%;
+
+                &.main-logo-game-col {
+                    margin-top: 20px;
+                }
             }
 
-            .roulette {
+            .roulette-container {
+                position: relative;
+
+                .roulette {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+
+                canvas {
+                    margin-top: 20px;
+                }
+            }
+
+            canvas,
+            .roulette,
+            .field {
                 width: 100%;
             }
 
@@ -327,7 +347,7 @@ html {
             }
 
             .question-container {
-                margin-top: 50px;
+                margin-top: 10px;
                 padding-bottom: 100px;
 
                 p {
@@ -617,6 +637,13 @@ html {
                 &.register-container {
                     .roulette {
                         width: 60%;
+                    }
+                }
+
+                .roulette-container {
+                    canvas,
+                    .roulette {
+                        width: 110%;
                     }
                 }
             }

@@ -23,8 +23,10 @@ $(document).ready(function() {
 		$fosUserRegistrationForm = $("#fosUserRegistrationForm"),
 		$isAssociatedCheckbox  = $("#fos_user_registration_form_isAssociated"),
 		$acceptedTermsCheckbox  = $("#fos_user_registration_form_acceptedTerms"),
+		$acceptedPersonalDataCheckbox  = $("#fos_user_registration_form_acceptedPersonalData"),
 		$isAssociatedStyledCheckbox  = $("#isAssociatedStyledCheckbox"),
 		$acceptedTermsStyledCheckbox  = $("#acceptedTermsStyledCheckbox"),
+		$acceptedPersonalDataStyledCheckbox  = $("#acceptedPersonalDataStyledCheckbox"),
 		$termsErrorContainer = $("#termsErrorContainer"),
 
 		// Player Dashboard
@@ -74,6 +76,7 @@ $(document).ready(function() {
 	// For styles checkboxes
 	$isAssociatedCheckbox.attr("checked", false);
 	$acceptedTermsCheckbox.attr("checked", false);
+	$acceptedPersonalDataCheckbox.attr("checked", false);
 
 	$isAssociatedStyledCheckbox.on("click", ".slider", function() {
 		$isAssociatedCheckbox.attr("checked", !$isAssociatedCheckbox.attr("checked"));
@@ -81,6 +84,10 @@ $(document).ready(function() {
 
 	$acceptedTermsStyledCheckbox.on("click", ".slider", function() {
 		$acceptedTermsCheckbox.attr("checked", !$acceptedTermsCheckbox.attr("checked"));
+	});
+
+	$acceptedPersonalDataStyledCheckbox.on("click", ".slider", function() {
+		$acceptedPersonalDataCheckbox.attr("checked", !$acceptedPersonalDataCheckbox.attr("checked"));
 	});
 
 	// Get User Info for Answered Questions and Last Login
@@ -99,8 +106,8 @@ $(document).ready(function() {
 				lastLoginTime = new Date(userInfo.lastLogin.date).getTime() - (7 * 60 * 60 * 1000);
 				hours = Math.abs(currentDate.getTime() - lastLoginTime) / 3600000;
 
-				console.log(hours);
-				console.log(userInfo.answeredQuestions);
+console.log(hours);
+console.log(userInfo.answeredQuestions);
 
 				$hoursMinsLeft = 24 - hours;
 				$hoursLeft = parseInt($hoursMinsLeft);

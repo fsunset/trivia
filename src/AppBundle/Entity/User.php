@@ -66,6 +66,13 @@ class User extends BaseUser {
     protected $acceptedTerms;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="acceptedPersonalData", type="boolean", options={"default":"0"})
+     */
+    protected $acceptedPersonalData;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="score", type="integer")
@@ -228,6 +235,29 @@ class User extends BaseUser {
     public function getAcceptedTerms()
     {
         return $this->acceptedTerms;
+    }
+
+    /**
+     * Set the value of acceptedPersonalData.
+     *
+     * @param string $acceptedPersonalData
+     * @return \AppBundle\Entity\User
+     */
+    public function setAcceptedPersonalData($acceptedPersonalData)
+    {
+        $this->acceptedPersonalData = $acceptedPersonalData;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of acceptedPersonalData.
+     *
+     * @return string
+     */
+    public function getAcceptedPersonalData()
+    {
+        return $this->acceptedPersonalData;
     }
 
     /**
