@@ -122,10 +122,10 @@ console.log(userInfo.answeredQuestions);
 						$timeLeft.html($hoursLeft + ":" + parseInt($minsLeft));
 						$timeLeftContainer.removeClass("hide");
 					} else {
-						$rouletteBtnContainer.html("<span id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' class='btn-roulette btn-roulette-yellow'> Jugar </span>");
+						$rouletteBtnContainer.html("<img id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' src='/img/btn-play.png' class='btn-play' alt='Jugar' width='200'>");
 					}
 				} else {
-					$rouletteBtnContainer.html("<span id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' class='btn-roulette btn-roulette-yellow'> Jugar </span>");
+					$rouletteBtnContainer.html("<img id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' src='/img/btn-play.png' class='btn-play' alt='Jugar' width='200'>");
 				}
 			},
 			error: function(error) {
@@ -208,7 +208,7 @@ console.log(userInfo.answeredQuestions);
 					$rouletteBtnContainer.html("");
 					message = "Ya respondiste las 3 preguntas de hoy.";
 				} else {
-					$rouletteBtnContainer.html("<span id='startStopRouletteBtn' data-static='true' data-loader=" + loaderPath + " class='btn-roulette btn-roulette-yellow'> Jugar </span>");
+					$rouletteBtnContainer.html("<img id='startStopRouletteBtn' data-static='true' data-loader='/img/gif/loader.gif' src='/img/btn-play.png' class='btn-play' alt='Jugar' width='200'>");
 				}
 
 				$playerScore.html(JSON.parse(data).score);
@@ -243,7 +243,7 @@ console.log(userInfo.answeredQuestions);
 
 			$this
 				.removeAttr("data-static")
-				.text("Detener");
+				.addClass("hide");
 
 			resetQuestion();
 		} else {
@@ -253,7 +253,7 @@ console.log(userInfo.answeredQuestions);
 
 			$this
 				.attr("data-static", true)
-				.text("Jugar");
+				.removeClass("hide");
 
 			$countDownContainer.html("<p class='count-down-container'>10</p>");
 			randomQuestion(htmlLoader);
