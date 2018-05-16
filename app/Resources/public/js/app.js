@@ -135,10 +135,10 @@ console.log(userInfo.answeredQuestions);
 	}
 
 	$(document).on("click", "#startStopRouletteBtn", function() {
+		$rouletteBtnContainer.html("");
 		randomQuestion(htmlLoader);
 		setTimeout(function() {
 			$countDownContainer.html("<p class='count-down-container'>10</p>");
-			$rouletteBtnContainer.html("");
 		}, 2000);
 	});
 

@@ -1,14 +1,18 @@
-<h3>¡Hola!</h3>
+<div class="container" style="background: url({{ absolute_url(asset('img/bg.jpg')) }}); background-repeat: no-repeat; background-position:left top; background-size: contain; padding: 30px;overflow:hidden;font-size: 14px;">
+    <img src="{{ absolute_url(asset('img/logo-game.png')) }}" alt="Ruleta Mundialista" width="150">
+    <img src="{{ absolute_url(asset('img/logo-colsubsidio.png')) }}" alt="Colsubsidio" width="150" style="margin-left: 20%; display: inline-block; margin-bottom: 30px;">
 
-<p>
-    Has sido convocado a la Trivia Mundialista de Colsubsidio por <strong>{{user.name|title}} {{user.lastName|title}}</strong>.
-</p>
+    <h3 style="color: white">¡Has sido convocado!</h3>
 
-<p>
-    <a href="{{ url('homepage') }}">Comienza a jugar y ganar acá</a>
-</p>
+    <p style="color: white; width: 40%;">
+        Tu amigo y director técnico <span style="color: #f8bb43;">{{user.name|title}} {{user.lastName|title}}</span> te ha convocado a participar de la Ruleta Mundialista Colsubsidio.
+    </p>
 
-Un saludo,
-<br>
-<br>
-El Equipo Colsubsidio.
+    <p style="color: white; width: 40%;">
+       Entra a la plantilla principal con el número de factura, número de recibo de pago ó el número de la reserva que realices entre el <span style="color: #f8bb43;">1ro de Abril y el 31 de Mayo de 2018</span> superior a <span style="color: #f8bb43;">$ 80.000</span> en servicios de recreación y turismo Colsubsidio: (<a href="http://piscilago.co" style="color: #f8bb43;">Piscilago</a>, <a href="http://www.hotelescolsubsidio.com/" style="color: #f8bb43;">Hoteles</a> y <a href="http://clubescolsubsidio.co" style="color: #f8bb43;">Clubes Colsubsidio</a>).
+    </p>
+
+    <p style="color: white; width: 40%;">Puedes registrarte en el siguiente link: <a href="{{ url('homepage') }}" style="color: #f8bb43;text-decoration:none;">{{ url('homepage') }}</a> y empezar a girar la Ruleta Mundialista Colsubsidio para ganar.</p>
+
+    <p style="color: white; width: 40%;">Recuerda leer todos las reglas del juego. <br><a href="http://ruletacolsubsidio.com/terminos-condiciones-ruleta-mundialista-colsubsidio.pdf" style="color: #f8bb43; text-decoration: none;">Términos y condiciones de la Ruleta Mundialista Colsubsidio.</a></p>
+</div>
